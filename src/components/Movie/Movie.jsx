@@ -60,6 +60,10 @@ class Movie extends Component {
 
   render() {
       const movie = this.state.movie
+      if (!this.state.isLoaded) {
+        return <div>loading...</div>
+      }
+
       return (
         <div className="Movie" >
           <MovieResume movie={movie}/>

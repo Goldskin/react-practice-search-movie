@@ -17,10 +17,15 @@ const Movie = Loadable({
     loading: Loading,
 });
 
+
+
 export default () => (
     <Router>
         <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/search" component={Home} />
+            <Route exact path="/search/:search" component={Home} />
+            <Route exact path="/search/:search/:page" component={Home} />
             <Route path="/movie/:id" component={Movie} />
         </Switch>
     </Router>
