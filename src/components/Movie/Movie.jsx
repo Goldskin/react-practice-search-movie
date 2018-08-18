@@ -1,27 +1,71 @@
 import React, { Component } from 'react';
 import './Movie.css';
+import { API_ROOT } from '../../config/api';
+import MovieResume from "../MovieResume/MovieResume";
+
 class Movie extends Component {
-  getPoster () {
-    return this.props.movie.Poster === "N/A" ? 
-      <div className="post-placeholder"></div> :
-      <img src={this.props.movie.Poster} alt={this.props.movie.Title} />
+  constructor(props) {
+    super(props)
+    this.state = {
+      history: [{ id: props.id }],
+      isLoaded: true,
+      mounted: false,
+      isError: false,
+      movie: {}
+    }
+  }
+
+  componentWillMount () {
+    this.mounted = true;
+    this.searchMovie(this.props.id)
+  }
+
+  componentWillUnmount () {
+    this.mounted = false;
+  }
+
+  searchMovie (id) {
+    this.setState({ 
+      isLoaded: false,
+      isError: false
+    })
+
+    return fetch(`${API_ROOT}&i=${id}`)
+      .then(res => res.json())
+      .then(result => {
+        if (result.Response === "False") {
+          return {
+            isLoaded: true,
+            isError: true,
+            movie: {}
+          }
+        }
+
+        return {
+          history: this.state.history.concat([{ id: id }]),
+          isLoaded: true,
+          isError: false,
+          movie: result
+        }
+      })
+      .catch(error => ({
+        isLoaded: true,
+        isError: true
+      })).then(state => {
+        if (this.mounted) {
+          this.setState(state)
+        }
+      })
   }
 
   render() {
-    return (
-      <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
-        <div className="row">
-          <div className="col-2">{this.getPoster()}</div>
-          <div className="col-10">
-            <div className="d-flex w-100 justify-content-between">
-              <h5 className="mb-1">{this.props.movie.Title}</h5>
-              <small>{this.props.movie.Year}</small>
-            </div>
-          </div>
+      const movie = this.state.movie
+      return (
+        <div className="Movie" >
+          <MovieResume movie={movie}/>
         </div>
-      </a>
-    )
-  }
+      )
+    }
 }
 
 export default Movie;

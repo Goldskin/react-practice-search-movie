@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './ListMovie.css';
-import Movie from '../Movie/Movie'
+import MoviePreview from '../MoviePreview/MoviePreview'
 
 class ListMovie extends Component {
   renderList() {
     return this.props.movies.map((movie, key) => {
       return (
-        <div key={key}><Movie movie={movie}/></div>
+        <div key={movie.imdbID}><MoviePreview movie={movie}/></div>
       )
     })
   }
