@@ -4,17 +4,17 @@ import classnames from 'classnames'
 
 class Pagination extends Component {
   total () {
-    return this.props.result / this.props.limit
+    return Math.ceil(this.props.result / this.props.limit)
   }
 
   page (index, sentence = null) {
     const classes = classnames(
-      'page-link',
-      {'font-weight-bold': this.props.current === index}
+      'page-item',
+      { 'active': this.props.current === index }
     )
     return (
-      <li className="page-item" key={index}>
-        <button className={classes} onClick={() => this.props.onClick(index)}>{sentence ? sentence : index}</button>
+      <li className={classes} key={index}>
+        <button className="page-link" onClick={() => this.props.onClick(index)}>{sentence ? sentence : index}</button>
       </li>
     )
   }
@@ -47,7 +47,7 @@ class Pagination extends Component {
   render() {
     return (
       <nav aria-label="Page navigation">
-        <ul className="pagination">
+        <ul className="pagination justify-content-center">
           {this.props.result == 0 ? '' : this.pages()}
         </ul>
       </nav>

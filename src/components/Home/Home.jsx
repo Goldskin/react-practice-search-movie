@@ -91,10 +91,15 @@ class Home extends Component {
         <Search
           query={this.state.query}
           onChange={query => this.updateQuery(query)}/>
+        <Pagination
+          limit={10}
+          result={this.state.total}
+          current={this.state.page}
+          onClick={index => this.updatePage(index)} />
         <ListMovie movies={movies}/>
         <Pagination
-          limit={10} 
-          result={this.state.total} 
+          limit={10}
+          result={this.state.total}
           current={this.state.page}
           onClick={index => this.updatePage(index)} />
       </div>
