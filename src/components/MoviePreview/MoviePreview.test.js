@@ -15,7 +15,7 @@ it('renders without crashing', () => {
   const currentRoute = <Router>
     <MoviePreview movie={movie} />
   </Router>
-  
+
   const div = document.createElement('div');
   ReactDOM.render(currentRoute, div);
   ReactDOM.unmountComponentAtNode(div);

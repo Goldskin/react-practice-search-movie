@@ -1,0 +1,12 @@
+.poster-placeholder {
+    width: 100%;
+    padding-top: 138%;
+    position: relative;
+    background-color: rgb(202, 202, 202);
+}
+
+.poster {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+}

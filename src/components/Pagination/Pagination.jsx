@@ -4,18 +4,16 @@ import MoviePreview from '../MoviePreview/MoviePreview'
 
 class ListMovie extends Component {
   renderList() {
-    return this.props.movies.map((movie) => {
+    return this.props.movies.map((movie, key) => {
       return (
-        <li key={movie.imdbID}>
-          <MoviePreview movie={movie}/>
-        </li>
+        <div key={movie.imdbID}><MoviePreview movie={movie}/></div>
       )
     })
   }
 
   render() {
     return (
-      <ul className="list-group">{this.renderList()}</ul>
+      <div className="list-group">{this.renderList()}</div>
     )
   }
 }

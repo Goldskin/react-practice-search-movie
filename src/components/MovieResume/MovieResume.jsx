@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import './MovieResume.css';
+import Poster from "../Poster/Poster";
 
 
 
 class MovieResume extends Component {
-  getPoster (movie) {
-    return movie.Poster === "N/A" ? 
-      <div className="post-placeholder"></div> :
-      <img src={movie.Poster} alt={movie.Title} />
-  }
-
   render() {
     const movie = this.props.movie
     return (
       <div className="row">
-        <div className="col-2">{this.getPoster(movie)}</div>
+        <div className="col-2">
+          <Poster 
+            url={movie.Poster}
+            alt={movie.Title}/>
+        </div>
         <div className="col-10">
           <h1>{movie.Title}</h1>
           <p><span className="font-weight-bold">Year:</span> {movie.Year}</p>

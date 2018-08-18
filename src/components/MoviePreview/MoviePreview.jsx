@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './MoviePreview.css';
 import { Link } from "react-router-dom";
+import Poster from "../Poster/Poster";
 
 
 
@@ -18,7 +19,11 @@ class MoviePreview extends Component {
     return (
       <Link to={path} className="list-group-item list-group-item-action flex-column align-items-start">
         <div className="row">
-          <div className="col-2">{this.getPoster(movie)}</div>
+          <div className="col-2">
+            <Poster
+              url={movie.Poster}
+              alt={movie.Title} />
+          </div>
           <div className="col-10">
             <h2>{movie.Title}</h2>
             <p>{movie.Year}</p>
